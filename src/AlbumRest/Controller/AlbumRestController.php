@@ -6,9 +6,11 @@ use Zend\Mvc\Controller\AbstractRestfulController;
 
 class AlbumRestController extends AbstractRestfulController
 {
+    protected $albumTable;
+
     public function getList()
     {
-        # code...
+        return  $this->getAlbumTable()->fetchAll();
     }
 
     public function get($id)
@@ -29,5 +31,14 @@ class AlbumRestController extends AbstractRestfulController
     public function delete($id)
     {
         # code...
+    }
+
+    public function getAlbumTable()
+    {
+        if (!$this->albumTable) {
+            $sm = $this->getServiceLocator();
+            $this->albumTable = $sm->get('Album\Model\AlbumTable');
+        }
+        return $this->albumTable;
     }
 }

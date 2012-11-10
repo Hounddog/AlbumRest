@@ -38,7 +38,8 @@ class AlbumRestControllerTest extends PHPUnit_Framework_TestCase
     {
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
-
+print_r($response);
+exit;
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -55,6 +56,7 @@ class AlbumRestControllerTest extends PHPUnit_Framework_TestCase
     public function testCreateCanBeAccessed()
     {
         $this->routeMatch->setParam('id', '1');
+        $this->request->setMethod('post');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -65,6 +67,7 @@ class AlbumRestControllerTest extends PHPUnit_Framework_TestCase
     public function testUpdateCanBeAccessed()
     {
         $this->routeMatch->setParam('id', '1');
+        $this->request->setMethod('put');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -75,10 +78,16 @@ class AlbumRestControllerTest extends PHPUnit_Framework_TestCase
     public function testDeleteCanBeAccessed()
     {
         $this->routeMatch->setParam('id', '1');
+        $this->request->setMethod('delete');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testGetAlbumTableReturnsAnInstanceOfAlbumTable()
+    {
+        $this->assertInstanceOf('Album\Model\AlbumTable', $this->controller->getAlbumTable());
     }
 }

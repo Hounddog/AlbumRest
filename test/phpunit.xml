@@ -2,8 +2,8 @@
 
 <phpunit bootstrap="Bootstrap.php">
     <testsuites>
-        <testsuite name="zf2tutorial">
-            <directory>./AlbumTest</directory>
+        <testsuite name="zf2tutorial-rest">
+            <directory>./AlbumRestTest</directory>
         </testsuite>
     </testsuites>
 </phpunit>
