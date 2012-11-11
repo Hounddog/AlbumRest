@@ -38,8 +38,7 @@ class AlbumRestControllerTest extends PHPUnit_Framework_TestCase
     {
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
-print_r($response);
-exit;
+
         $this->assertEquals(200, $response->getStatusCode());
     }
 
