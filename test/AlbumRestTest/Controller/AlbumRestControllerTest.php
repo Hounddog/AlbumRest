@@ -54,8 +54,9 @@ class AlbumRestControllerTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCanBeAccessed()
     {
-        $this->routeMatch->setParam('id', '1');
         $this->request->setMethod('post');
+        $this->request->getPost()->set('artist', 'foo');
+        $this->request->getPost()->set('title', 'bar');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

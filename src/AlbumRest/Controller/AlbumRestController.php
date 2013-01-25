@@ -7,6 +7,7 @@ use Zend\Mvc\Controller\AbstractRestfulController;
 use Album\Model\Album;          // <-- Add this import
 use Album\Form\AlbumForm;       // <-- Add this import
 use Album\Model\AlbumTable;     // <-- Add this import
+use Zend\View\Model\JsonModel;
 
 class AlbumRestController extends AbstractRestfulController
 {
@@ -20,14 +21,18 @@ class AlbumRestController extends AbstractRestfulController
             $data[] = $result;
         }
 
-        return array('data' => $data);
+        return new JsonModel(array(
+            'data' => $data,
+        ));
     }
 
     public function get($id)
     {
         $album = $this->getAlbumTable()->getAlbum($id);
 
-        return array("data" => $album);
+        return new JsonModel(array(
+            'data' => $album,
+        ));
     }
 
     public function create($data)
@@ -41,7 +46,9 @@ class AlbumRestController extends AbstractRestfulController
             $id = $this->getAlbumTable()->saveAlbum($album);
         }
 
-        return $this->get($id);
+        return new JsonModel(array(
+            'data' => $this->get($id),
+        ));
     }
 
     public function update($id, $data)
@@ -56,14 +63,18 @@ class AlbumRestController extends AbstractRestfulController
             $id = $this->getAlbumTable()->saveAlbum($form->getData());
         }
 
-        return $this->get($id);
+        return new JsonModel(array(
+            'data' => $this->get($id),
+        ));
     }
 
     public function delete($id)
     {
         $this->getAlbumTable()->deleteAlbum($id);
 
-        return array('data' => 'deleted');
+        return new JsonModel(array(
+            'data' => 'deleted',
+        ));
     }
 
     public function getAlbumTable()
