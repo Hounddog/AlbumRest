@@ -6,7 +6,6 @@ use Zend\Mvc\Controller\AbstractRestfulController;
 
 use Album\Model\Album;          // <-- Add this import
 use Album\Form\AlbumForm;       // <-- Add this import
-use Album\Model\AlbumTable;     // <-- Add this import
 use Zend\View\Model\JsonModel;
 
 class AlbumRestController extends AbstractRestfulController
